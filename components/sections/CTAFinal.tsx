@@ -6,7 +6,7 @@ const WA = 'https://wa.me/5511986997299';
 export default function CTAFinal() {
   const ref = useReveal();
   return (
-    <section id="contato" className="py-32 px-5 relative overflow-hidden">
+    <section id="contato" className="py-16 md:py-32 px-5 relative overflow-hidden">
       {/* Background glow */}
       <div
         className="absolute inset-0 pointer-events-none"

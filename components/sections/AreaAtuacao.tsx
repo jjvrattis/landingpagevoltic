@@ -16,7 +16,7 @@ export default function AreaAtuacao() {
   const ref = useReveal();
 
   return (
-    <section id="area" className="py-32 px-6" style={{ background: '#050505' }}>
+    <section id="area" className="py-16 md:py-32 px-6" style={{ background: '#050505' }}>
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
@@ -123,7 +123,7 @@ export default function AreaAtuacao() {
           </div>
 
           {/* Right: map */}
-          <div style={{ height: 480, minHeight: 380 }}>
+          <div style={{ height: 'clamp(300px, 50vw, 480px)' }}>
             <CoverageMap />
           </div>
 

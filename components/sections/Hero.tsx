@@ -31,7 +31,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex-1 flex items-center max-w-7xl mx-auto px-6 w-full pt-28 pb-16">
+      <div className="relative z-10 flex-1 flex items-center max-w-7xl mx-auto px-6 w-full pt-24 md:pt-28 pb-10 md:pb-16">
         <div className="max-w-xl">
 
           {/* Eyebrow — LN style: small caps, no pill */}
@@ -64,7 +64,7 @@ export default function Hero() {
 
           {/* Sub */}
           <p
-            className="text-base mb-10 leading-relaxed max-w-sm"
+            className="text-base mb-8 md:mb-10 leading-relaxed max-w-sm"
             style={{
               color: 'rgba(255,255,255,0.45)',
               fontFamily: 'var(--font-inter)',
@@ -77,7 +77,7 @@ export default function Hero() {
 
           {/* CTAs — LN slash style */}
           <div
-            className="flex flex-wrap gap-3 mb-16"
+            className="flex flex-wrap gap-3 mb-10 md:mb-16"
             style={{ animation: 'fadeUp 0.6s ease-out 0.45s both' }}
           >
             <a

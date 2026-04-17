@@ -39,6 +39,7 @@ export default function Nav() {
             alt="Voltic"
             width={165}
             height={66}
+            className="w-[110px] md:w-[165px] h-auto"
             style={{ objectFit: 'contain' }}
             priority
           />

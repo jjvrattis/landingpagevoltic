@@ -72,141 +72,128 @@ export default function HorizontalScroll() {
   }, []);
 
   return (
-    <div
-      ref={sectionRef}
-      id="como-funciona"
-      // 4 panels = need (panels - 1) * 100vh of scroll room + 100vh for the sticky
-      style={{ height: `${PANELS.length * 100}vh` }}
-    >
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col">
-
-        {/* Progress bar */}
-        <div className="absolute top-0 left-0 right-0 h-px z-20" style={{ background: 'rgba(255,255,255,0.06)' }}>
-          <div
-            ref={progressRef}
-            className="h-full transition-none"
-            style={{ background: '#FFD700', width: '0%' }}
-          />
-        </div>
-
-        {/* Eyebrow — fixed in corner */}
-        <div className="absolute top-8 left-6 md:left-12 z-20 flex items-center gap-3">
-          <p className="text-xs uppercase tracking-[0.22em]"
-            style={{ color: 'rgba(255,255,255,0.3)', fontFamily: 'var(--font-rajdhani)' }}>
-            Processo
-          </p>
-          <span style={{ color: 'rgba(255,255,255,0.1)' }}>—</span>
-          <p className="text-xs uppercase tracking-[0.22em]"
-            style={{ color: 'rgba(255,255,255,0.15)', fontFamily: 'var(--font-rajdhani)' }}>
-            Simples assim
-          </p>
-        </div>
-
-        {/* Horizontal track */}
-        <div
-          ref={trackRef}
-          className="flex h-full"
-          style={{
-            width: `${PANELS.length * 100}vw`,
-            willChange: 'transform',
-            transition: 'transform 0.05s linear',
-          }}
-        >
+    <>
+      {/* ── MOBILE: vertical steps ──────────────────────────────────── */}
+      <div id="como-funciona" className="md:hidden py-20 px-6" style={{ background: '#050505' }}>
+        <p className="text-xs uppercase tracking-[0.22em] mb-12"
+          style={{ color: 'rgba(255,255,255,0.3)', fontFamily: 'var(--font-rajdhani)' }}>
+          Processo — Simples assim
+        </p>
+        <div className="flex flex-col gap-0">
           {PANELS.map((panel, i) => (
-            <div
-              key={panel.n}
-              className="flex-shrink-0 w-screen h-full flex items-center"
-              style={{ background: panel.bg, borderRight: i < PANELS.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none' }}
-            >
-              <div className="max-w-7xl mx-auto px-6 md:px-16 w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-
-                {/* Left: text */}
-                <div>
-                  {/* Step number */}
-                  <span
-                    className="text-[120px] font-black leading-none select-none"
+            <div key={panel.n} style={{ borderLeft: `2px solid ${panel.color}22` }}>
+              <div className="pl-6 py-10" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+                <span className="text-xs font-bold mb-3 block"
+                  style={{ color: panel.color, fontFamily: 'var(--font-rajdhani)', letterSpacing: '0.1em' }}>
+                  {panel.n}
+                </span>
+                <h2 className="mb-4"
+                  style={{
+                    fontFamily: 'var(--font-rajdhani)',
+                    fontSize: 'clamp(32px,8vw,48px)',
+                    fontWeight: 700,
+                    color: '#fff',
+                    letterSpacing: '-0.02em',
+                    lineHeight: 0.95,
+                  }}>
+                  {panel.title.join(' ')}
+                </h2>
+                <p className="text-sm leading-relaxed mb-6"
+                  style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'var(--font-inter)' }}>
+                  {panel.body}
+                </p>
+                {panel.cta && (
+                  <a href={WA} target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold"
                     style={{
                       fontFamily: 'var(--font-rajdhani)',
-                      color: panel.color,
-                      opacity: 0.12,
-                      display: 'block',
-                      marginBottom: -32,
-                      lineHeight: 1,
-                    }}
-                  >
-                    {panel.n}
-                  </span>
-
-                  <SplitReveal
-                    lines={panel.title}
-                    as="h2"
-                    direction="right"
-                    delay={100}
-                    style={{
-                      fontFamily: 'var(--font-rajdhani)',
-                      fontSize: 'clamp(48px,7vw,88px)',
-                      fontWeight: 700,
-                      color: '#fff',
-                      letterSpacing: '-0.02em',
-                      lineHeight: 0.95,
-                      marginBottom: 28,
-                    }}
-                  />
-
-                  <p
-                    className="text-base leading-relaxed mb-10"
-                    style={{ color: 'rgba(255,255,255,0.4)', maxWidth: 400, fontFamily: 'var(--font-inter)' }}
-                  >
-                    {panel.body}
-                  </p>
-
-                  {panel.cta && (
-                    <a
-                      href={WA}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-8 py-4 text-sm font-bold transition-all duration-200"
-                      style={{
-                        fontFamily: 'var(--font-rajdhani)',
-                        letterSpacing: '0.1em',
-                        background: '#FFD700',
-                        color: '#050505',
-                        clipPath: 'polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)',
-                      }}
-                      onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#fff')}
-                      onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#FFD700')}
-                    >
-                      QUERO COMEÇAR
-                    </a>
-                  )}
-                </div>
-
-                {/* Right: 3D icon */}
-                <div className="hidden md:flex items-center justify-center">
-                  <Icon3D src={panel.icon} size={280} />
-                </div>
-
+                      letterSpacing: '0.1em',
+                      background: '#FFD700',
+                      color: '#050505',
+                      clipPath: 'polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)',
+                    }}>
+                    QUERO COMEÇAR
+                  </a>
+                )}
               </div>
             </div>
           ))}
         </div>
-
-        {/* Panel counter bottom right */}
-        <div className="absolute bottom-8 right-6 md:right-12 z-20 flex gap-2">
-          {PANELS.map((p, i) => (
-            <div
-              key={p.n}
-              className="h-px transition-all duration-300"
-              style={{
-                width: 24,
-                background: p.color,
-                opacity: 0.3,
-              }}
-            />
-          ))}
-        </div>
-
       </div>
-    </div>
+
+      {/* ── DESKTOP: horizontal scroll ──────────────────────────────── */}
+      <div
+        ref={sectionRef}
+        className="hidden md:block"
+        style={{ height: `${PANELS.length * 100}vh` }}
+      >
+        <div className="sticky top-0 h-screen overflow-hidden flex flex-col">
+
+          <div className="absolute top-0 left-0 right-0 h-px z-20" style={{ background: 'rgba(255,255,255,0.06)' }}>
+            <div ref={progressRef} className="h-full transition-none" style={{ background: '#FFD700', width: '0%' }} />
+          </div>
+
+          <div className="absolute top-8 left-12 z-20 flex items-center gap-3">
+            <p className="text-xs uppercase tracking-[0.22em]"
+              style={{ color: 'rgba(255,255,255,0.3)', fontFamily: 'var(--font-rajdhani)' }}>
+              Processo
+            </p>
+            <span style={{ color: 'rgba(255,255,255,0.1)' }}>—</span>
+            <p className="text-xs uppercase tracking-[0.22em]"
+              style={{ color: 'rgba(255,255,255,0.15)', fontFamily: 'var(--font-rajdhani)' }}>
+              Simples assim
+            </p>
+          </div>
+
+          <div
+            ref={trackRef}
+            className="flex h-full"
+            style={{ width: `${PANELS.length * 100}vw`, willChange: 'transform', transition: 'transform 0.05s linear' }}
+          >
+            {PANELS.map((panel, i) => (
+              <div
+                key={panel.n}
+                className="flex-shrink-0 w-screen h-full flex items-center"
+                style={{ background: panel.bg, borderRight: i < PANELS.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none' }}
+              >
+                <div className="max-w-7xl mx-auto px-16 w-full grid grid-cols-2 gap-12 items-center">
+                  <div>
+                    <span className="font-black leading-none select-none block"
+                      style={{ fontFamily: 'var(--font-rajdhani)', fontSize: 120, color: panel.color, opacity: 0.12, marginBottom: -32, lineHeight: 1 }}>
+                      {panel.n}
+                    </span>
+                    <SplitReveal lines={panel.title} as="h2" direction="right" delay={100}
+                      style={{ fontFamily: 'var(--font-rajdhani)', fontSize: 'clamp(48px,7vw,88px)', fontWeight: 700, color: '#fff', letterSpacing: '-0.02em', lineHeight: 0.95, marginBottom: 28 }}
+                    />
+                    <p className="text-base leading-relaxed mb-10"
+                      style={{ color: 'rgba(255,255,255,0.4)', maxWidth: 400, fontFamily: 'var(--font-inter)' }}>
+                      {panel.body}
+                    </p>
+                    {panel.cta && (
+                      <a href={WA} target="_blank" rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-8 py-4 text-sm font-bold transition-all duration-200"
+                        style={{ fontFamily: 'var(--font-rajdhani)', letterSpacing: '0.1em', background: '#FFD700', color: '#050505', clipPath: 'polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)' }}
+                        onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#fff')}
+                        onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#FFD700')}>
+                        QUERO COMEÇAR
+                      </a>
+                    )}
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <Icon3D src={panel.icon} size={280} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="absolute bottom-8 right-12 z-20 flex gap-2">
+            {PANELS.map((p) => (
+              <div key={p.n} className="h-px" style={{ width: 24, background: p.color, opacity: 0.3 }} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

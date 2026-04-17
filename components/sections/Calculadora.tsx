@@ -34,7 +34,7 @@ export default function Calculadora() {
   }, []);
 
   return (
-    <section className="py-32 px-6" style={{ background: '#080808' }}>
+    <section className="py-16 md:py-32 px-6" style={{ background: '#080808' }}>
       <div className="max-w-5xl mx-auto">
 
         {/* Header */}

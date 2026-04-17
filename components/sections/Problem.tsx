@@ -5,7 +5,7 @@ import SplitReveal from '@/components/SplitReveal';
 export default function Problem() {
   const ref = useReveal();
   return (
-    <section className="py-32 px-6" style={{ background: '#050505' }}>
+    <section className="py-16 md:py-32 px-6" style={{ background: '#050505' }}>
       <div ref={ref} className="reveal max-w-5xl mx-auto">
 
         {/* Eyebrow */}
