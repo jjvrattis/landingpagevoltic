@@ -154,7 +154,6 @@ export default function MapMoto() {
 
     (async () => {
       const mgl = (await import('mapbox-gl')).default;
-      await import('mapbox-gl/dist/mapbox-gl.css' as any);
       if (!mapRef.current) return;
 
       mgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN!;
